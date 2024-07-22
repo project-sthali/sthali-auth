@@ -6,7 +6,7 @@ requires = ["setuptools>=61.0"]
 name = "sthali-auth"
 version = "0.0.0.1"
 authors = [{ name = "Jhunu Fernandes", email = "jhunu.fernandes@gmail.com" }]
-description = "A FastAPI package dependency for SthaliCRUD ...{XXX}..."
+description = "A FastAPI package dependency for keep SthaliBackend safe"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -15,19 +15,17 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 dependencies = [
-  "fastapi >= 0.111.0",
-  "pydantic",
+  "fastapi >= 0.111.1",
+  "pydantic >= 2.8.2",
 ]
 
 [project.optional-dependencies]
 dev = [
+  "ruff >= 0.5.2",
   "coverage",
-  "mkdocs",
-  "pytest",
-  "ruff",
 ]
-tests = ["coverage", "pytest"]
-stage = ["build", "coverage", "pytest"]
+tests = ["coverage"]
+stage = ["build", "coverage"]
 
 [project.urls]
 "Homepage" = "https://github.com/jhunufernandes/sthali-auth"
@@ -44,7 +42,7 @@ show_missing = true
 [tool.ruff]
 line-length = 119
 exclude = [
-  "tests/",
+  # "tests/",
 ]
 
 [tool.ruff.lint]
@@ -59,6 +57,18 @@ ignore = [
   "ISC001",  # single-line-implicit-string-concatenation
   "TID252",  # relative-imports
   # "D107",  # undocumented-public-init
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+  "ANN001",
+  "D100",
+  "D101",
+  "D102",
+  "PGH003",
+  "PT009",
+  "PT027",
+  "S101",
 ]
 
 [tool.ruff.lint.pydocstyle]

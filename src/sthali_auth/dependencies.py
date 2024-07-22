@@ -1,11 +1,7 @@
-"""This module provides the dependencies for sthali-auth usage."""
-import typing
+"""This module provides the dependencies for sthali-backend usage."""
+from typing import Annotated
 
-import fastapi
-import pydantic
+from fastapi import Depends
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-
-async def authorize(req: fastapi.Request) -> typing.NoReturn:
-    """Not implemented."""
-    # token = req.auth
-    raise NotImplementedError
+http_basic: Annotated[HTTPBasicCredentials, Depends(HTTPBasic())]
