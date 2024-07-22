@@ -1,0 +1,75 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.0"]
+
+[project]
+name = "sthali-auth"
+version = "0.0.0.1"
+authors = [{ name = "Jhunu Fernandes", email = "jhunu.fernandes@gmail.com" }]
+description = "A FastAPI package dependency for keep SthaliBackend safe"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+  "Programming Language :: Python :: 3.10",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "fastapi >= 0.111.1",
+  "pydantic >= 2.8.2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff >= 0.5.2",
+  "coverage",
+]
+tests = ["coverage"]
+stage = ["build", "coverage"]
+
+[project.urls]
+"Homepage" = "https://github.com/jhunufernandes/sthali-auth"
+"Bug Tracker" = "https://github.com/jhunufernandes/sthali-auth/issues"
+
+[tool.coverage.run]
+branch = true
+command_line = "-m unittest discover -v -s tests/"
+
+[tool.coverage.report]
+omit = ["tests/*"]
+show_missing = true
+
+[tool.ruff]
+line-length = 119
+exclude = [
+  # "tests/",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "ANN002",  # missing-type-args
+  "ANN003",  # missing-type-kwargs
+  "ANN101",  # missing-type-self
+  "ANN102",  # missing-type-cls
+  "ANN401",  # any-type
+  "COM812",  # missing-trailing-comma
+  "ISC001",  # single-line-implicit-string-concatenation
+  "TID252",  # relative-imports
+  # "D107",  # undocumented-public-init
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+  "ANN001",
+  "D100",
+  "D101",
+  "D102",
+  "PGH003",
+  "PT009",
+  "PT027",
+  "S101",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
