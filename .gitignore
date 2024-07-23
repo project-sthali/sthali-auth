@@ -10,3 +10,7 @@ dist
 
 # Cache directories
 *_cache
+
+# Volumes
+/volume
+/sthali_crud
