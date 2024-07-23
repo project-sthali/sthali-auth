@@ -47,8 +47,8 @@ class APIKeyAuth:
     def dependency(self):
         def api_key_auth(key: Annotated[str, Depends(self.scheme)], request: Request):
             print("api_key_auth")
-            headers = {"X-API-Key": key}
-            json = {"service": self.service, "resource": request.url.path, "auth": {"": f"api_key_{self.type}"}}
-            self.client.call(headers=headers, json=json)
+            # headers = {"X-API-Key": key}
+            # json = {"service": self.service, "resource": request.url.path, "auth": {"": f"api_key_{self.type}"}}
+            # self.client.call(headers=headers, json=json)
 
         return Depends(api_key_auth)
