@@ -1,5 +1,4 @@
 """This module provides security components."""
-
 from collections.abc import Callable
 from contextlib import asynccontextmanager
 from logging import info
@@ -12,7 +11,7 @@ from pydantic.dataclasses import dataclass
 from sthali_crud import AppSpecification as CRUDAppSpecification
 from sthali_crud import SthaliCRUD, load_and_parse_spec_file
 
-from .dependencies import APIKeyAuth, APIKey
+from .dependencies import APIKey, APIKeyAuth
 
 api_router = APIRouter()
 

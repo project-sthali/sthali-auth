@@ -17,6 +17,10 @@ classifiers = [
 dependencies = [
   "fastapi >= 0.111.1",
   "pydantic >= 2.8.2",
+  "httpx",
+  "uvicorn",
+  "sthali-crud",  # one of this will be removed
+  "sthali-backend",  # one of this will be removed
 ]
 
 [project.optional-dependencies]
