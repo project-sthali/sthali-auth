@@ -2,6 +2,7 @@
 from typing import Annotated, Literal
 
 from fastapi import Depends, Request
+from fastapi.routing import APIRoute
 from fastapi.security import APIKeyCookie, APIKeyHeader, APIKeyQuery
 from pydantic.dataclasses import dataclass
 
@@ -16,32 +17,47 @@ class APIKey:
     auto_error: bool = True
 
 
-class APIKeyScheme:
-    header = APIKeyHeader
-    cookie = APIKeyCookie
-    query = APIKeyQuery
+@dataclass
+class APIKeySpecification:
+    type: Literal["header", "cookie", "query"]
+    api_key: APIKey
 
 
 class APIKeyAuth:
     client = ServiceClient()
 
-    def __init__(self, api_key: APIKey, type: Literal["header", "cookie", "query"], service: str) -> None:
-        scheme = getattr(APIKeyScheme, type)
-        self.type = type
+    def __init__(self, api_key_spec: APIKeySpecification, service: str) -> None:
+        if api_key_spec.type == "header":
+            scheme = APIKeyHeader
+        elif api_key_spec.type == "cookie":
+            scheme = APIKeyCookie
+        elif api_key_spec.type == "query":
+            scheme = APIKeyQuery
+        else:
+            raise Exception
+        self.api_key_spec_type = f"api_key_{api_key_spec.type}"
         self.service = service
         self.scheme = scheme(
-            name=api_key.name,
-            scheme_name=api_key.scheme_name,
-            description=api_key.description,
-            auto_error=api_key.auto_error,
+            name=api_key_spec.api_key.name,
+            scheme_name=api_key_spec.api_key.scheme_name,
+            description=api_key_spec.api_key.description,
+            auto_error=api_key_spec.api_key.auto_error,
         )
 
     @property
     def dependency(self):
         def api_key_auth(key: Annotated[str, Depends(self.scheme)], request: Request):
-            print("api_key_auth")
-            # headers = {"X-API-Key": key}
-            # json = {"service": self.service, "resource": request.url.path, "auth": {"": f"api_key_{self.type}"}}
-            # self.client.call(headers=headers, json=json)
+            route: APIRoute = request.scope['route']
+            headers = {}
+            json = {
+                "service": self.service,
+                "resource": route.path,
+                "endpoint": route.name,
+                "auth": {
+                    "type": self.api_key_spec_type,
+                    "key": key,
+                }
+            }
+            self.client.call(headers=headers, json=json)
 
         return Depends(api_key_auth)

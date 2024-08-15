@@ -11,24 +11,35 @@ from pydantic.dataclasses import dataclass
 from sthali_crud import AppSpecification as CRUDAppSpecification
 from sthali_crud import SthaliCRUD, load_and_parse_spec_file
 
-from .dependencies import APIKey, APIKeyAuth
+from .clients.api_key import APIKeyAuth, APIKeySpecification
 
 api_router = APIRouter()
 
 
 class Auth(BaseModel):
-    method: Literal["api_key_header"]
+    type: Literal["api_key_header", "api_key_cookie", "api_key_query"]
+    key: str
 
 
 class Authorize(BaseModel):
     service: str
     resource: str
+    endpoint: str
     auth: Auth
 
 
 @api_router.post("/authorize")
 async def authorize(authorize: Authorize) -> None:
     print("authorize")
+    """{
+        "service": "service",
+        "resource": "/samples/",
+        "endpoint": "create",
+        "auth": {
+            "type":"api_key_header",
+            "key":"123"
+        }
+    }"""
     print(authorize.model_dump_json())
     return
 
@@ -69,7 +80,7 @@ class SthaliAuth(SthaliCRUD):
 
 __all__ = [
     "APIKeyAuth",
-    "APIKey",
+    "APIKeySpecification",
     "AppSpecification",
     "SthaliAuth",
     "load_and_parse_spec_file",
