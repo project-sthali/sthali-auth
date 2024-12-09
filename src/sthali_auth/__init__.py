@@ -1,87 +1,85 @@
-"""This module provides security components."""
-from collections.abc import Callable
-from contextlib import asynccontextmanager
-from logging import info
-from typing import Any, Literal
+# # """This module provides security components."""
 
-from fastapi import APIRouter, FastAPI
-from pydantic import BaseModel
-from pydantic.dataclasses import dataclass
+# import collections.abc
+# import typing
 
-from sthali_crud import AppSpecification as CRUDAppSpecification
-from sthali_crud import SthaliCRUD, load_and_parse_spec_file
+# import fastapi
+# import pydantic
 
-from .clients.api_key import APIKeyAuth, APIKeySpecification
+# import sthali_backend
 
-api_router = APIRouter()
-
-
-class Auth(BaseModel):
-    type: Literal["api_key_header", "api_key_cookie", "api_key_query"]
-    key: str
-
-
-class Authorize(BaseModel):
-    service: str
-    resource: str
-    endpoint: str
-    auth: Auth
-
-
-@api_router.post("/authorize")
-async def authorize(authorize: Authorize) -> None:
-    print("authorize")
-    """{
-        "service": "service",
-        "resource": "/samples/",
-        "endpoint": "create",
-        "auth": {
-            "type":"api_key_header",
-            "key":"123"
-        }
-    }"""
-    print(authorize.model_dump_json())
-    return
-
-
-@dataclass
-class AppSpecification:
-    """Represents the specification of a SthaliAuth application.
-
-    Attributes:
-        service (ServiceSpecification): {...}.
-        crud (CRUDAppSpecification): Represents the specification of a SthaliCRUD application.
-    """
-
-    # service: Annotated[ServiceSpecification, Field(description="...")]
-    crud: CRUDAppSpecification
-
-
-@asynccontextmanager
-async def default_lifespan(app: FastAPI):
-    """A context manager that handles the startup and shutdown of SthaliAuth.
-
-    Args:
-        app (FastAPI): The FastAPI application instance.
-
-    Yields:
-        None
-    """
-    info("Startup SthaliAuth")
-    yield
-    info("Shutdown SthaliAuth")
-
-
-class SthaliAuth(SthaliCRUD):
-    def __init__(self, app_spec: AppSpecification, lifespan: Callable[..., Any] = default_lifespan) -> None:
-        super().__init__(app_spec.crud, lifespan)
-        self.app.include_router(api_router)
-
+# from . import dependencies
+# from .clients import Payload, ServiceClientSpecification
+# from .clients.api_key import APIKeySpecification
+# from .config import Config
+from .auth import Auth, AuthSpecification
 
 __all__ = [
-    "APIKeyAuth",
-    "APIKeySpecification",
-    "AppSpecification",
-    "SthaliAuth",
-    "load_and_parse_spec_file",
+    "Auth",
+    "AuthSpecification",
+#     "AppSpecification",
+#     "Config",
+#     "SthaliAuth",
+#     "default_lifespan",
+#     "dependencies",
 ]
+
+
+# default_lifespan = sthali_backend.default_lifespan
+
+
+
+# @pydantic.dataclasses.dataclass
+# class ResourceSpecification:
+#     class AuthorizationSchemeEnum:
+#         api_key = "api_key"
+
+#     name: typing.Annotated[str, pydantic.Field(description="The name of the resource")]
+#     authorization_scheme: typing.Annotated[AuthorizationSchemeEnum, pydantic.Field(description="Possible authorization methods")]
+#     endpoints: typing.Annotated[str, pydantic.Field(description="The name of the resource")]
+
+
+# @pydantic.dataclasses.dataclass
+# class AppSpecification(sthali_backend.AppSpecification):
+#     """Represents the specification of a SthaliAuth application."""
+#     resources: typing.Annotated[
+#         list[ResourceSpecification],
+#         pydantic.Field(default_factory=list, description="The list of resource security specifications"),
+#     ]
+
+#     def __post_init__(self):  # fix pydantic default values
+#         self.title = "SthaliAuth"
+#         self.description = "A FastAPI package for implement services."
+
+
+# class SthaliAuth(sthali_backend.SthaliBackend):
+#     """A class to initialize and configure a FastAPI application with {...}.
+
+#     Args:
+#         app_specification (AppSpecification): The specification of the application, including title, description, summary,
+#             version, dependencies, and resources.
+#         lifespan (collections.abc.Callable[..., typing.Any]): The lifespan of the application.
+#             Defaults to default_lifespan.
+#     """
+
+#     def __init__(
+#         self, app_specification: AppSpecification, lifespan: collections.abc.Callable[..., typing.Any] = sthali_backend.default_lifespan
+#     ) -> None:
+#         """Initializes the SthaliAuth instance.
+
+#         Args:
+#             app_specification (AppSpecification): The specification of the application, including title, description, summary,
+#                 version, dependencies, and resources.
+#             lifespan (collections.abc.Callable[..., typing.Any]): The lifespan of the application.
+#                 Defaults to default_lifespan.
+#         """
+#         super().__init__(app_specification, lifespan)
+#         self.app.include_router(authorize_router)
+
+
+# authorize_router = fastapi.APIRouter()
+
+
+# @authorize_router.post("/authorize")
+# def authorize(payload: Payload) -> None:
+#         pass
