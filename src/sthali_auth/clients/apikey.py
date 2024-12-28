@@ -8,27 +8,27 @@ import pydantic
 from . import Base, BaseSpecification, Payload, ServiceClient
 
 
-@pydantic.dataclasses.dataclass
-class APIKeySpecification(BaseSpecification):
-    class SchemeEnum(enum.Enum):
-        header = fastapi.security.APIKeyHeader
-        cookie = fastapi.security.APIKeyCookie
-        query = fastapi.security.APIKeyQuery
+class ApikeyClient(Base):
+    @pydantic.dataclasses.dataclass
+    class Specification(BaseSpecification):
+        # class SchemeEnum(enum.Enum):
+        #     header = fastapi.security.APIKeyHeader
+        #     cookie = fastapi.security.APIKeyCookie
+        #     query = fastapi.security.APIKeyQuery
 
-    scheme: SchemeEnum
-    name: str
-    scheme_name: str | None = None
-    description: str | None = None
-    auto_error: bool = True
+        name: str
+        scheme = fastapi.security.APIKeyHeader
+        scheme_name: str | None = None
+        description: str | None = None
+        auto_error: bool = True
 
 
-class APIKeyClient(Base):
     def __init__(
-        self, api_key_specification: APIKeySpecification,
+        self, api_key_specification: Specification,
     ) -> None:
         self.client = ServiceClient(api_key_specification.service_client_specification)
 
-        self.scheme = api_key_specification.scheme.value(
+        self.scheme = api_key_specification.scheme(
             name=api_key_specification.name,
             scheme_name=api_key_specification.scheme_name,
             description=api_key_specification.description,
