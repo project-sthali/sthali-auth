@@ -11,14 +11,14 @@
 # from . import dependencies
 # from .clients import Payload, ServiceClientSpecification
 # from .clients.api_key import APIKeySpecification
-# from .config import Config
+from .config import Config
 from .auth import Auth, AuthSpecification
 
 __all__ = [
     "Auth",
     "AuthSpecification",
 #     "AppSpecification",
-#     "Config",
+    "Config",
 #     "SthaliAuth",
 #     "default_lifespan",
 #     "dependencies",

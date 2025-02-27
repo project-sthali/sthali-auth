@@ -1,5 +1,5 @@
-# import sthali_backend
+import sthali_backend
 
 
-# class Config(sthali_backend.Config):
-#     ...
+class Config(sthali_backend.Config):
+    ...
