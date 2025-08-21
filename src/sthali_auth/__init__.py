@@ -12,11 +12,11 @@
 # from .clients import Payload, ServiceClientSpecification
 # from .clients.api_key import APIKeySpecification
 from .config import Config
-from .auth import Auth, AuthSpecification
+# from .auth import Auth, AuthSpecification
 
 __all__ = [
-    "Auth",
-    "AuthSpecification",
+    # "Auth",
+    # "AuthSpecification",
 #     "AppSpecification",
     "Config",
 #     "SthaliAuth",

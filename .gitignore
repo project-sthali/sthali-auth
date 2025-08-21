@@ -12,10 +12,11 @@ dist
 # Cache directories
 *_cache
 
+# Vscode
+.vscode
+
+# Docs static files
+docs/site
+
 # Volumes
 volume
-
-# Symbolic links
-sthali_backend
-sthali_crud
-sthali_db
