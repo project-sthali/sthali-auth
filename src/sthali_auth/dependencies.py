@@ -1,7 +1,7 @@
-"""This module provides the dependencies for sthali-backend usage."""
-from typing import Annotated
+# # """This module provides the dependencies for sthali-auth usage."""
+# from .clients.apikey import APIKeyClient, APIKeySpecification
 
-from fastapi import Depends
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
-
-http_basic: Annotated[HTTPBasicCredentials, Depends(HTTPBasic())]
+# __all__ = [
+#     "APIKeyClient",
+#     "APIKeySpecification",
+# ]
