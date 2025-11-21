@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: sthali-auth
+Version: 0.0.1
+Summary: A FastAPI lib for keep your app safe
+Author-email: Jhunu Fernandes <jhunu.fernandes@gmail.com>
+Project-URL: Homepage, https://github.com/project-sthali/sthali-auth
+Project-URL: Bug Tracker, https://github.com/project-sthali/sthali-auth/issues
+Project-URL: Source, https://github.com/project-sthali/sthali-auth
+Project-URL: Documentation, https://project-sthali.github.io/sthali-auth
+Project-URL: Changelog, https://github.com/project-sthali/sthali-auth/releases
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi==0.121.3
+Requires-Dist: pyjwt==2.10.1
+Provides-Extra: dev
+Requires-Dist: coverage[toml]>=7.12.0; extra == "dev"
+Requires-Dist: ruff>=0.14.6; extra == "dev"
+Provides-Extra: tests
+Requires-Dist: coverage[toml]>=7.12.0; extra == "tests"
+Provides-Extra: stage
+Requires-Dist: build>=1.3.0; extra == "stage"
+Requires-Dist: coverage[toml]>=7.12.0; extra == "stage"
