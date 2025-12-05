@@ -1,4 +1,4 @@
-#!/Users/jhunufernandes/Documents/bkp/sthali-auth/.venv/bin/python3.10
+#!/Users/jhunufernandes/Documents/sthali-auth/.venv/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys

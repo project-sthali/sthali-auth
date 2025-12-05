@@ -1,0 +1,13 @@
+# Environments
+.venv
+venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__
+build
+dist
+.coverage
+*.egg-info
+
+# Cache directories
+*_cache

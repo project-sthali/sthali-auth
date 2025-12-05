@@ -30,10 +30,11 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "fastapi == 0.121.3",
+  "fastapi[standard] == 0.121.3",
   "pwdlib[argon2] == 0.3.0",
   "pyjwt == 2.10.1",
   "python-multipart == 0.0.20",
+  "tenacity == 9.1.2",
   "uvicorn == 0.38.0",
 ]
 
