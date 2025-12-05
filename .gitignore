@@ -11,3 +11,9 @@ dist
 
 # Cache directories
 *_cache
+
+# IDEs and editors
+.vscode
+
+# OS files
+.DS_Store
