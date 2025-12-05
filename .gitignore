@@ -1,6 +1,8 @@
 # Environments
 .venv
+.env
 venv
+env
 
 # Byte-compiled / optimized / DLL files
 __pycache__
@@ -8,6 +10,9 @@ build
 dist
 .coverage
 *.egg-info
+
+# Custom byte-compiled files
+.db
 
 # Cache directories
 *_cache
