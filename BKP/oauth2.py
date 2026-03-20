@@ -6,7 +6,7 @@ import jwt
 import pwdlib
 import pydantic
 
-from .db import User, UserInDB, get_user
+from ..src.sthali_auth.db import User, UserInDB, get_user
 
 # to get a string like this run:
 # openssl rand -hex 32

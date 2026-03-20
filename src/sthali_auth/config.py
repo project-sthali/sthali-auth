@@ -1,18 +1,25 @@
-import os
+"""{...}."""
 
-import dotenv
-
-dotenv.load_dotenv()
+from sthali_core.config import ConfigSchema as BaseConfigSchema
 
 
-class Config:
-    def __init__(self) -> None:
-        sqlalchemy_database_uri = os.getenv("SQLALCHEMY_DATABASE_URI")
-        if not isinstance(sqlalchemy_database_uri, str):
-            msg = "SQLALCHEMY_DATABASE_URI environment variable is not set"
-            raise TypeError(msg)
+class ConfigSchema(BaseConfigSchema):
+    """{...}."""
 
-        self.sqlalchemy_database_uri = sqlalchemy_database_uri
+    class AuthSchema(BaseConfigSchema):
+        """{...}."""
 
+        class APIKeySchema(BaseConfigSchema):
+            type: str
+            name: str
+            scheme_name: str | None = None
+            description: str | None = None
+            auto_error: bool | None = None
 
-config = Config()
+        class OAuth2Schema(BaseConfigSchema):
+            access_token_expire_minutes: int
+
+        api_key: APIKeySchema | None = None
+        oauth2: OAuth2Schema | None = None
+
+    auth: AuthSchema | None = None

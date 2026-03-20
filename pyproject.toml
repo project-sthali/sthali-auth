@@ -30,12 +30,14 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "fastapi[standard] == 0.121.3",
-  "pwdlib[argon2] == 0.3.0",
-  "pyjwt == 2.10.1",
-  "python-multipart == 0.0.20",
-  "tenacity == 9.1.2",
-  "uvicorn == 0.38.0",
+  # "alembic",
+  # "sthali-crud @ file:../sthali-crud/",
+  # "sthali-core @ file:../sthali-core/",
+  "sthali-db @ file:../sthali-db/",
+  # "pwdlib[argon2]",
+  # "pyjwt",
+  # "python-multipart",
+  # "tenacity",
 ]
 
 [project.urls]
@@ -85,3 +87,11 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.alembic]
+script_location = "%(here)s/alembic"
+file_template = "%%(year)d_%%(month).2d_%%(day).2d_%%(hour).2d%%(minute).2d-%%(rev)s_%%(slug)s"
+prepend_sys_path = [
+  ".",
+]
+sqlalchemy_url = "sqlite:///sthali_auth.db"
