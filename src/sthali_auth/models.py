@@ -1,4 +1,4 @@
-"""{...}."""
+"""SQLAlchemy ORM models for users and roles."""
 
 from sqlalchemy import UUID, Column, ForeignKey, String, Table
 from sqlalchemy.orm import relationship
@@ -13,7 +13,7 @@ user_roles = Table(
 
 
 class UserModel(BaseModel):
-    """{...}."""
+    """ORM model representing an application user."""
 
     __tablename__ = "users"
 
@@ -25,7 +25,7 @@ class UserModel(BaseModel):
 
 
 class RoleModel(BaseModel):
-    """{...}."""
+    """ORM model representing a user role."""
 
     __tablename__ = "roles"
 

@@ -33,7 +33,7 @@ dependencies = [
   # "alembic",
   # "sthali-crud @ file:../sthali-crud/",
   # "sthali-core @ file:../sthali-core/",
-  "sthali-db @ file:../sthali-db/",
+  "sthali-db @ file:./sthali-db/",
   # "pwdlib[argon2]",
   # "pyjwt",
   # "python-multipart",
@@ -80,9 +80,11 @@ ignore = [
   "D102",  # undocumented-public-method
   "D104",  # undocumented-public-package
   "D106",  # undocumented-public-nested-class
+  "D107",  # undocumented-magic-method
   "PIE804",  # unnecessary-dict-kwargs
   "PT009",  # pytest-unittest-assertion
   "PT027",  # pytest-unittest-raises-assertion
+  "SLF001",  # private-member-access
 ]
 
 [tool.ruff.lint.pydocstyle]
